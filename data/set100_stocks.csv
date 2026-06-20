@@ -1,0 +1,98 @@
+symbol,name,sector
+KBANK,Kasikornbank,Banking & Finance
+BBL,Bangkok Bank,Banking & Finance
+SCB,Siam Commercial Bank,Banking & Finance
+KTB,Krungthai Bank,Banking & Finance
+TTB,TMBThanachart Bank,Banking & Finance
+BAY,Bank of Ayudhya,Banking & Finance
+TISCO,TISCO Financial Group,Banking & Finance
+KKP,Kiatnakin Phatra Bank,Banking & Finance
+TCAP,Thanachart Capital,Banking & Finance
+AEONTS,AEON Thana Sinsap,Banking & Finance
+JMT,JMT Network Services,Banking & Finance
+MBK,MBK,Banking & Finance
+ASK,Asia Sermkij Leasing,Banking & Finance
+PTT,PTT,Energy
+PTTEP,PTT Exploration and Production,Energy
+GULF,Gulf Energy Development,Energy
+GPSC,Global Power Synergy,Energy
+RATCH,Ratch Group,Energy
+EGCO,Electricity Generating,Energy
+BCPG,BCPG,Energy
+EA,Energy Absolute,Energy
+BGRIM,B.Grimm Power,Energy
+IRPC,IRPC,Energy
+TOP,Thai Oil,Energy
+PTTGC,PTT Global Chemical,Energy
+OR,PTT Oil and Retail Business,Energy
+BAFS,Bangkok Aviation Fuel Services,Energy
+BDMS,Bangkok Dusit Medical Services,Healthcare
+BH,Bumrungrad Hospital,Healthcare
+BCH,Bangkok Chain Hospital,Healthcare
+CHG,Chularat Hospital,Healthcare
+RJH,Ramkhamhaeng Hospital,Healthcare
+NKI,Nonkam Industries,Healthcare
+VIBHA,Vibhavadi Medical Center,Healthcare
+THANI,Ratchthani Leasing,Healthcare
+ADVANC,Advanced Info Service,Telecom & Tech
+TRUE,True Corporation,Telecom & Tech
+INTUCH,Intouch Holdings,Telecom & Tech
+INSET,Infraset,Telecom & Tech
+JMART,Jaymart Group Holdings,Telecom & Tech
+SIS,SIS Distribution Thailand,Telecom & Tech
+COM7,Com7,Telecom & Tech
+CPALL,CP All,Retail & Consumer
+CRC,Central Retail Corporation,Retail & Consumer
+BJC,Berli Jucker,Retail & Consumer
+HMPRO,Home Product Center,Retail & Consumer
+MAKRO,Siam Makro,Retail & Consumer
+CPN,Central Pattana,Retail & Consumer
+GLOBAL,Siam Global House,Retail & Consumer
+AU,Gold Futures,Retail & Consumer
+CPF,Charoen Pokphand Foods,Food & Bev
+TU,Thai Union Group,Food & Bev
+OSP,Osotspa,Food & Bev
+CBG,Carabao Group,Food & Bev
+ICHI,Ichitan Group,Food & Bev
+MALEE,Malee Group,Food & Bev
+TKN,Thanakorn Vegetable Oil Products,Food & Bev
+GFPT,GFPT,Food & Bev
+BTG,Better Technology Group,Food & Bev
+SCC,SCG Packaging,Industrial
+SCCC,Siam City Cement,Industrial
+TPI,TPI Polene,Industrial
+WHA,WHA Corporation,Industrial
+DCC,Ds Cable Tec,Industrial
+AOT,Airports of Thailand,Tourism & Hospitality
+MINT,Minor International,Tourism & Hospitality
+ERW,Erawan Group,Tourism & Hospitality
+CENTEL,Central Plaza Hotel,Tourism & Hospitality
+AWC,Asset World Corporation,Tourism & Hospitality
+LH,Land and Houses,Real Estate
+SPALI,Supalai,Real Estate
+SC,SC Asset Corporation,Real Estate
+SIRI,Sansiri,Real Estate
+AP,AP Thailand,Real Estate
+ORI,Origin Property,Real Estate
+PRUKSA,Pruksa Holding,Real Estate
+NOBLE,Noble Development,Real Estate
+AAV,Asia Aviation,Transportation
+THAI,Thai Airways International,Transportation
+NOK,Nok Airlines,Transportation
+TASCO,Tipco Asphalt,Petrochemicals
+GC,GC,Petrochemicals
+SAT,Somboon Advance Technology,Others
+STANLY,Stanley Electric,Others
+AAPICO,Aapico Hitech,Others
+MPT,Muangthai Capital,Others
+NRF,Nawarat Patanakarn,Others
+STGT,Sri Trang Gloves Thailand,Healthcare
+PTG,PTG Energy,Energy
+SPRC,Star Petroleum Refining,Energy
+DELTA,Delta Electronics Thailand,Telecom & Tech
+HANA,Hana Microelectronics,Telecom & Tech
+KCE,KCE Electronics,Telecom & Tech
+STA,Sri Trang Agro-Industry,Food & Bev
+TWPC,Thai Wire Products,Industrial
+ROJNA,Rojana Industrial Park,Industrial
+AMATA,Amata Corporation,Industrial

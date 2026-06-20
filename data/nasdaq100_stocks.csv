@@ -1,0 +1,100 @@
+symbol,name,sector
+AAPL,Apple,Tech
+MSFT,Microsoft,Tech
+NVDA,NVIDIA,Tech
+AMD,Advanced Micro Devices,Tech
+INTC,Intel,Tech
+CSCO,Cisco Systems,Tech
+QCOM,Qualcomm,Tech
+AVGO,Broadcom,Tech
+TXN,Texas Instruments,Tech
+AMAT,Applied Materials,Tech
+LRCX,Lam Research,Tech
+KLAC,KLA Corporation,Tech
+MU,Micron Technology,Tech
+MRVL,Marvell Technology,Tech
+ON,ON Semiconductor,Tech
+SWKS,Skyworks Solutions,Tech
+MCHP,Microchip Technology,Tech
+NXPI,NXP Semiconductors,Tech
+ADI,Analog Devices,Tech
+SNPS,Synopsys,Tech
+CDNS,Cadence Design Systems,Tech
+ANSS,ANSYS,Tech
+FTNT,Fortinet,Tech
+PANW,Palo Alto Networks,Tech
+CRWD,CrowdStrike Holdings,Tech
+ZS,Zscaler,Tech
+OKTA,Okta,Tech
+DDOG,Datadog,Tech
+WDAY,Workday,Tech
+TEAM,Atlassian,Tech
+GOOGL,Alphabet Class A,Internet & Software
+GOOG,Alphabet Class C,Internet & Software
+META,Meta Platforms,Internet & Software
+AMZN,Amazon,Internet & Software
+NFLX,Netflix,Internet & Software
+ADBE,Adobe,Internet & Software
+INTU,Intuit,Internet & Software
+PYPL,PayPal Holdings,Internet & Software
+EBAY,eBay,Internet & Software
+MTCH,Match Group,Internet & Software
+ZM,Zoom Video Communications,Internet & Software
+SPLK,Splunk,Internet & Software
+TTWO,Take-Two Interactive,Internet & Software
+TSLA,Tesla,Consumer
+COST,Costco Wholesale,Consumer
+PEP,PepsiCo,Consumer
+MDLZ,Mondelez International,Consumer
+MNST,Monster Beverage,Consumer
+KDP,Keurig Dr Pepper,Consumer
+SBUX,Starbucks,Consumer
+LULU,Lululemon Athletica,Consumer
+ROST,Ross Stores,Consumer
+DLTR,Dollar Tree,Consumer
+ORLY,O'Reilly Automotive,Consumer
+CPRT,Copart,Consumer
+FAST,Fastenal,Consumer
+PCAR,PACCAR,Consumer
+MAR,Marriott International,Consumer
+ABNB,Airbnb,Consumer
+BKNG,Booking Holdings,Consumer
+AMGN,Amgen,Healthcare & Biotech
+GILD,Gilead Sciences,Healthcare & Biotech
+VRTX,Vertex Pharmaceuticals,Healthcare & Biotech
+REGN,Regeneron Pharmaceuticals,Healthcare & Biotech
+ISRG,Intuitive Surgical,Healthcare & Biotech
+BIIB,Biogen,Healthcare & Biotech
+IDXX,IDEXX Laboratories,Healthcare & Biotech
+DXCM,Dexcom,Healthcare & Biotech
+ILMN,Illumina,Healthcare & Biotech
+GEHC,GE HealthCare Technologies,Healthcare & Biotech
+AZN,AstraZeneca,Healthcare & Biotech
+TMUS,T-Mobile US,Telecom
+CMCSA,Comcast,Telecom
+HON,Honeywell International,Industrial
+CTAS,Cintas,Industrial
+ODFL,Old Dominion Freight Line,Industrial
+VRSK,Verisk Analytics,Industrial
+PAYX,Paychex,Industrial
+EXC,Exelon,Utilities
+XEL,Xcel Energy,Utilities
+CEG,Constellation Energy,Utilities
+MELI,MercadoLibre,Other
+PDD,PDD Holdings,Other
+ASML,ASML Holding,Tech
+ENPH,Enphase Energy,Other
+RIVN,Rivian Automotive,Consumer
+FANG,Diamondback Energy,Other
+DKNG,DraftKings,Other
+SIRI,Sirius XM Holdings,Internet & Software
+MRNA,Moderna,Healthcare & Biotech
+ALGN,Align Technology,Healthcare & Biotech
+LULU,Lululemon Athletica,Consumer
+APP,AppLovin,Internet & Software
+CSGP,CoStar Group,Other
+TTWO,Take-Two Interactive Software,Internet & Software
+MDB,MongoDB,Tech
+NTNX,Nutanix,Tech
+FSLR,First Solar,Other
+WBD,Warner Bros Discovery,Internet & Software

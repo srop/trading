@@ -1,0 +1,17 @@
+symbol,exchange,name,sector
+GC1!,COMEX,Gold Futures,Precious Metals
+GLD,AMEX,SPDR Gold Shares,Precious Metals
+IAU,AMEX,iShares Gold Trust,Precious Metals
+GDX,AMEX,VanEck Gold Miners ETF,Gold Miners
+GDXJ,AMEX,VanEck Junior Gold Miners ETF,Gold Miners
+SLV,AMEX,iShares Silver Trust,Precious Metals
+PPLT,AMEX,Aberdeen Platinum ETF,Precious Metals
+PALL,AMEX,Aberdeen Palladium ETF,Precious Metals
+USO,AMEX,United States Oil Fund,Energy
+XLE,AMEX,Energy Select Sector SPDR,Energy
+XOP,AMEX,SPDR S&P Oil & Gas Exploration,Energy
+CPER,AMEX,United States Copper Index Fund,Base Metals
+DBB,AMEX,Invesco DB Base Metals Fund,Base Metals
+DBA,AMEX,Invesco DB Agriculture Fund,Agriculture
+WEAT,AMEX,Teucrium Wheat Fund,Agriculture
+CORN,AMEX,Teucrium Corn Fund,Agriculture

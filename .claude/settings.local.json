@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm /Users/chanika/Documents/Code/tradebot/.claude/commands/sepa.md)",
+      "Bash(rmdir /Users/chanika/Documents/Code/tradebot/.claude/commands)",
+      "Bash(mkdir -p /Users/chanika/Documents/Code/tradebot/.claude/skills/sepa)",
+      "Bash(mkdir -p /Users/chanika/Documents/Code/tradebot/.claude/commands)",
+      "Bash(cp /Users/chanika/Documents/Code/tradebot/.claude/skills/sepa/SKILL.md /Users/chanika/Documents/Code/tradebot/.claude/commands/sepa.md)",
+      "Bash(rm -rf /Users/chanika/Documents/Code/tradebot/.claude/skills)",
+      "Bash(python3 -m py_compile main.py src/config.py src/data.py src/analyzer.py src/scoring.py src/output.py)",
+      "Bash(python3 *)",
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "Bash(uvicorn webhook.server:app --host 0.0.0.0 --port 8080)",
+      "Bash(curl -s http://localhost:8080/health)",
+      "Bash(kill %1)",
+      "Bash(curl -s \"https://api.telegram.org/bot8914170344:AAEcJf4rEiraAiE9gskVq8ObAePrgzM_kxk/getUpdates\")",
+      "Bash(wait)",
+      "Bash(pkill -f \"python.*bot.py\")",
+      "Bash(pkill -f \"python.*start.py\")",
+      "Bash(pkill -f \"python.*runner.py\")"
+    ]
+  }
+}

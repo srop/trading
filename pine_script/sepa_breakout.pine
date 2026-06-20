@@ -1,0 +1,73 @@
+//@version=5
+indicator("SEPA Breakout — Minervini", overlay=true, max_labels_count=500)
+
+// ── Inputs ──────────────────────────────────────────────
+pivot_len    = input.int(50,  "Pivot Length (days)",  minval=20, maxval=100)
+vol_mult     = input.float(1.5, "Volume Surge Min",   minval=1.0, step=0.1)
+min_trend    = input.int(7,   "Min Trend Score",      minval=5,   maxval=9)
+max_ext_pct  = input.float(10.0, "Max Extended %",    minval=5.0, step=1.0)
+
+// ── Moving Averages ──────────────────────────────────────
+ma50  = ta.sma(close, 50)
+ma150 = ta.sma(close, 150)
+ma200 = ta.sma(close, 200)
+ma10  = ta.sma(close, 10)
+ma21  = ta.ema(close, 21)
+
+// ── Pivot & Volume ──────────────────────────────────────
+pivot     = ta.highest(high, pivot_len)
+pivot_1   = ta.highest(high, pivot_len)[1]   // yesterday's pivot (for cross detection)
+vol_avg20 = ta.sma(volume, 20)
+vol_ratio = volume / vol_avg20
+
+// ── 52-week High/Low ────────────────────────────────────
+high52w = ta.highest(high, 252)
+low52w  = ta.lowest(low,  252)
+
+// ── Trend Template (9 conditions) ───────────────────────
+t1 = close > ma50
+t2 = close > ma150
+t3 = close > ma200
+t4 = ma50  > ma150
+t5 = ma50  > ma200
+t6 = ma150 > ma200
+t7 = ta.sma(close, 200) > ta.sma(close, 200)[21]
+t8 = close > low52w  * 1.30
+t9 = close >= high52w * 0.75
+
+trend_score = (t1?1:0)+(t2?1:0)+(t3?1:0)+(t4?1:0)+(t5?1:0)+
+              (t6?1:0)+(t7?1:0)+(t8?1:0)+(t9?1:0)
+
+// ── Breakout Conditions ──────────────────────────────────
+price_breakout = close > pivot_1                             // ราคาทะลุ pivot ของเมื่อวาน
+volume_surge   = vol_ratio >= vol_mult                       // volume surge
+trend_ok       = trend_score >= min_trend                    // trend template ผ่าน
+not_extended   = close <= pivot_1 * (1 + max_ext_pct / 100) // ไม่ extended เกิน
+
+breakout = price_breakout and volume_surge and trend_ok and not_extended
+           and barstate.isconfirmed                          // รอแท่ง close เท่านั้น
+
+// ── Plots ────────────────────────────────────────────────
+plot(pivot,  "Pivot (50d High)", color=color.new(color.orange, 0), linewidth=2, style=plot.style_stepline)
+plot(ma50,   "MA50",  color=color.new(color.blue,   0), linewidth=1)
+plot(ma150,  "MA150", color=color.new(color.purple,  0), linewidth=1)
+plot(ma200,  "MA200", color=color.new(color.red,     0), linewidth=1)
+
+plotshape(breakout, "Breakout", shape.triangleup, location.belowbar, color.new(color.green, 0), size=size.normal)
+
+// ── Alert Message (JSON สำหรับ webhook) ─────────────────
+if breakout
+    msg = '{"ticker":"'    + syminfo.ticker +
+          '","exchange":"'  + syminfo.prefix +
+          '","close":'      + str.tostring(math.round(close, 2)) +
+          ',"high":'        + str.tostring(math.round(high, 2)) +
+          ',"low":'         + str.tostring(math.round(low, 2)) +
+          ',"volume":'      + str.tostring(volume) +
+          ',"pivot":'       + str.tostring(math.round(pivot, 2)) +
+          ',"vol_ratio":'   + str.tostring(math.round(vol_ratio, 2)) +
+          ',"trend_score":' + str.tostring(trend_score) +
+          ',"ma50":'        + str.tostring(math.round(ma50, 2)) +
+          ',"ma150":'       + str.tostring(math.round(ma150, 2)) +
+          ',"ma200":'       + str.tostring(math.round(ma200, 2)) +
+          ',"time":"'       + str.tostring(timenow) + '"}'
+    alert(msg, alert.freq_once_per_bar_close)
