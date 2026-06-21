@@ -1,0 +1,12 @@
+services:
+  tradebot:
+    build: .
+    restart: always
+    env_file: .env
+    volumes:
+      - ./credentials.json:/app/credentials.json:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
