@@ -48,7 +48,13 @@ class Position:
 
 def _get_sheet() -> gspread.Worksheet:
     """Authorize and return the Positions worksheet, creating it if absent."""
-    creds = Credentials.from_service_account_file(CREDENTIALS_PATH, scopes=SCOPES)
+    import json, base64
+    raw = os.getenv('GOOGLE_CREDENTIALS_JSON', '')
+    if raw:
+        info = json.loads(base64.b64decode(raw).decode() if '\\n' not in raw and '{' not in raw else raw)
+        creds = Credentials.from_service_account_info(info, scopes=SCOPES)
+    else:
+        creds = Credentials.from_service_account_file(CREDENTIALS_PATH, scopes=SCOPES)
     client = gspread.authorize(creds)
     spreadsheet = client.open_by_key(SHEET_ID)
 
