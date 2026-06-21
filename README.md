@@ -101,7 +101,7 @@ python start.py
 
 ```bash
 python runner.py   # สแกน Breakout + ตรวจจุดขาย
-python bot.py      # Telegram Bot รับคำสั่ง /buy /positions
+python bot.py      # Telegram Bot รับคำสั่ง /price /buy /positions
 ```
 
 ### Screen — สแกนด้วยตนเอง (CLI)
@@ -119,9 +119,17 @@ python screen.py all
 
 | คำสั่ง | รูปแบบ | ตัวอย่าง |
 |--------|--------|---------|
+| `/price` | `/price SYMBOL EXCHANGE` | `/price GLD AMEX` |
 | `/buy` | `/buy SYMBOL EXCHANGE PRICE SHARES` | `/buy NVDA NASDAQ 210.50 678` |
 | `/positions` | `/positions` | แสดง open positions ทั้งหมด |
 | `/help` | `/help` | แสดงคำสั่งทั้งหมด |
+
+**`/price` แสดงข้อมูล:**
+- ราคาปัจจุบัน (real-time 15min)
+- Trend Template X/9 + ทิศทาง (ขาขึ้น / ทรงตัว / ขาลง)
+- ราคาเทียบ MA50 / MA150 / MA200
+- ระยะห่างจาก 52-week High และ Low
+- สรุปว่าน่าจับตามองแค่ไหน
 
 **EXCHANGE ที่รองรับ:** `SET` `NASDAQ` `NYSE` `AMEX` `COMEX`
 

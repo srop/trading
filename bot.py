@@ -16,6 +16,8 @@ from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 from src.sheets import add_position, get_open_positions
+from src.breakout import build_daily_cache
+from src.exit_monitor import get_current_price
 
 logging.basicConfig(
     level=logging.INFO,
@@ -168,6 +170,94 @@ async def positions_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 # /help
 # ─────────────────────────────────────────────────────────────────────────────
 
+async def price_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Show current price + trend for a symbol. Usage: /price SYMBOL EXCHANGE"""
+    if not _is_authorized(update):
+        return
+
+    args = context.args or []
+    if len(args) < 2:
+        await update.message.reply_text(
+            "⚠️ การใช้งาน: <code>/price SYMBOL EXCHANGE</code>\n"
+            "ตัวอย่าง: <code>/price GLD AMEX</code>  หรือ  <code>/price NVDA NASDAQ</code>",
+            parse_mode=ParseMode.HTML,
+        )
+        return
+
+    symbol   = args[0].upper()
+    exchange = args[1].upper()
+    currency = '฿' if exchange == 'SET' else '$'
+
+    await update.message.reply_text(f"⏳ กำลังดึงข้อมูล {symbol}...")
+
+    price = get_current_price(symbol, exchange)
+    if not price:
+        await update.message.reply_text(f"❌ ดึงราคา {symbol} ไม่ได้ ลองใหม่อีกครั้ง")
+        return
+
+    cache = build_daily_cache(symbol, exchange)
+    if not cache:
+        await update.message.reply_text(
+            f"💰 <b>{symbol} ({exchange})</b>\n"
+            f"ราคาปัจจุบัน: <b>{currency}{price:,.2f}</b>\n"
+            f"(ข้อมูล trend ไม่เพียงพอ)",
+            parse_mode=ParseMode.HTML,
+        )
+        return
+
+    # Trend direction
+    if cache.trend_score >= 7:
+        trend_label = "📈 ขาขึ้นแข็งแกร่ง"
+    elif cache.trend_score >= 5:
+        trend_label = "➡️ ทรงตัว / ไม่ชัดเจน"
+    else:
+        trend_label = "📉 ขาลง"
+
+    # Position vs MAs
+    vs_ma50  = (price / cache.ma50  - 1) * 100
+    vs_ma150 = (price / cache.ma150 - 1) * 100
+    vs_ma200 = (price / cache.ma200 - 1) * 100
+
+    # Distance from 52w high/low
+    from52h = (price / cache.high52w - 1) * 100
+    from52l = (price / cache.low52w  - 1) * 100
+
+    # Breakout zone check
+    if price > cache.pivot:
+        pivot_status = f"✅ เหนือ Pivot ({currency}{cache.pivot:,.2f})"
+    else:
+        gap = (cache.pivot / price - 1) * 100
+        pivot_status = f"⏳ ห่างจาก Pivot {gap:.1f}% ({currency}{cache.pivot:,.2f})"
+
+    msg = (
+        f"🔍 <b>{symbol} ({exchange})</b>\n"
+        f"{'─' * 30}\n"
+        f"💰 ราคา: <b>{currency}{price:,.2f}</b>\n\n"
+        f"<b>แนวโน้ม</b>\n"
+        f"  {trend_label}  ({cache.trend_score}/9)\n"
+        f"  {pivot_status}\n\n"
+        f"<b>เทียบเส้นค่าเฉลี่ย</b>\n"
+        f"  MA50  : {currency}{cache.ma50:,.2f}  ({vs_ma50:+.1f}%)\n"
+        f"  MA150 : {currency}{cache.ma150:,.2f}  ({vs_ma150:+.1f}%)\n"
+        f"  MA200 : {currency}{cache.ma200:,.2f}  ({vs_ma200:+.1f}%)\n\n"
+        f"<b>ช่วง 52 สัปดาห์</b>\n"
+        f"  สูงสุด: {currency}{cache.high52w:,.2f}  ({from52h:+.1f}%)\n"
+        f"  ต่ำสุด: {currency}{cache.low52w:,.2f}  ({from52l:+.1f}%)\n"
+        f"{'─' * 30}\n"
+    )
+
+    if cache.trend_score >= 7 and price > cache.pivot:
+        msg += "⚡ <b>Breakout Zone — น่าจับตามอง</b>"
+    elif cache.trend_score >= 7:
+        msg += "👀 Trend ดี รอ Breakout"
+    elif cache.trend_score <= 3:
+        msg += "⚠️ Trend อ่อนแอ ยังไม่น่าสนใจ"
+    else:
+        msg += "😐 ยังไม่มีสัญญาณชัดเจน"
+
+    await update.message.reply_text(msg, parse_mode=ParseMode.HTML)
+
+
 async def help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Show available commands."""
     if not _is_authorized(update):
@@ -175,6 +265,9 @@ async def help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
     msg = (
         "📖 <b>SEPA TradeBot — คำสั่งที่ใช้ได้</b>\n\n"
+        "<b>/price SYMBOL EXCHANGE</b>\n"
+        "  ดูราคาปัจจุบัน + แนวโน้ม\n"
+        "  ตัวอย่าง: <code>/price GLD AMEX</code>\n\n"
         "<b>/buy SYMBOL EXCHANGE PRICE SHARES</b>\n"
         "  บันทึก position ใหม่\n"
         "  ตัวอย่าง: <code>/buy NVDA NASDAQ 210.50 678</code>\n\n"
@@ -200,6 +293,7 @@ def main() -> None:
         raise RuntimeError("TELEGRAM_BOT_TOKEN is not set in .env")
 
     app = Application.builder().token(BOT_TOKEN).build()
+    app.add_handler(CommandHandler('price',     price_handler))
     app.add_handler(CommandHandler('buy',       buy_handler))
     app.add_handler(CommandHandler('positions', positions_handler))
     app.add_handler(CommandHandler('help',      help_handler))
